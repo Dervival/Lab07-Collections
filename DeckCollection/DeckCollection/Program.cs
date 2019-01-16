@@ -25,6 +25,14 @@ namespace DeckCollection
             //nextCard.CardSuit = Card.Suit.Diamonds;
             AddCardToDeck(Card.Rank.Nine, Card.Suit.Diamonds, testDeck);
             DisplayDeck(testDeck);
+            AddCardToDeck(Card.Rank.Eight, Card.Suit.Diamonds, testDeck);
+            DisplayDeck(testDeck);
+            AddCardToDeck(Card.Rank.Seven, Card.Suit.Diamonds, testDeck);
+            DisplayDeck(testDeck);
+            AddCardToDeck(Card.Rank.Six, Card.Suit.Diamonds, testDeck);
+            DisplayDeck(testDeck);
+            AddCardToDeck(Card.Rank.Six, Card.Suit.Spades, testDeck);
+            DisplayDeck(testDeck);
         }
 
         public static void DisplayCard(Card card)
@@ -48,13 +56,28 @@ namespace DeckCollection
 
         public class Deck<Card> : IEnumerable<Card>
         {
-            readonly Card[] internalCards = new Card[6];
+            Card[] internalCards = new Card[6];
             int currentIndex = 0;
 
             public void AddCard(Card newCard)
             {
+                if(currentIndex > internalCards.Length - 1)
+                {
+                    internalCards = GrowArray(internalCards);
+                }
                 internalCards[currentIndex] = newCard;
                 currentIndex++;
+            }
+
+            public Card[] GrowArray(Card[] arrayToResize)
+            {
+                Console.WriteLine("Resizing array to " + arrayToResize.Length * 2 + " elements");
+                Card[] newArray = new Card[arrayToResize.Length * 2];
+                for(int i = 0; i < arrayToResize.Length; i++)
+                {
+                    newArray[i] = arrayToResize[i];
+                }
+                return newArray;
             }
 
             //IEnumerable interface methods
