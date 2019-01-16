@@ -6,8 +6,25 @@ namespace DeckCollection.Classes
 {
     public class Card
     {
-        public Enum CardSuit { get; set; }
-        public Enum CardRank { get; set; }
+        public Suit CardSuit { get; set; }
+        public void SetSuit(Suit suit)
+        {
+            CardSuit = suit;
+        }
+        public Suit GetSuit()
+        {
+            return CardSuit;
+        } 
+        public Rank CardRank { get; set; }
+        public void SetRank(Rank rank)
+        {
+            CardRank = rank;
+        }
+        public Rank GetRank()
+        {
+            return CardRank;
+        }
+
         public Card(Rank cardRank, Suit cardSuit)
         {
             CardRank = cardRank;
@@ -38,5 +55,14 @@ namespace DeckCollection.Classes
             King,
             Ace
         };
+
+        public bool Equals(Card a, Card b)
+        {
+            if(a.GetRank() == b.GetRank() && a.GetSuit() == b.GetSuit())
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

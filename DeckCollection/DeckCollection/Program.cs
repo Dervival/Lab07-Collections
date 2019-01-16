@@ -33,6 +33,8 @@ namespace DeckCollection
             DisplayDeck(testDeck);
             AddCardToDeck(Card.Rank.Six, Card.Suit.Spades, testDeck);
             DisplayDeck(testDeck);
+            testDeck.RemoveCard(nextCard);
+            DisplayDeck(testDeck);
         }
 
         public static void DisplayCard(Card card)
@@ -68,16 +70,24 @@ namespace DeckCollection
                 internalCards[currentIndex] = newCard;
                 currentIndex++;
             }
-            //public Card RemoveCard(Card removeCard)
-            //{
-            //    for(int)
-            //}
+            public void RemoveCard(Card removeCard)
+            {
+                int indexToRemove = FindCardIndex(removeCard);
+                for (int i = indexToRemove; i < currentIndex; i++)
+                {
+                    internalCards[i] = internalCards[i + 1];
+                }
+                //using default(Card) instead of null to remove the last card
+                internalCards[currentIndex] = default(Card);
+                currentIndex--;
+            }
             public int FindCardIndex(Card card)
             {
+                Console.WriteLine("In FindCardIndex");
                 int index = -1;
                 for(int i = 0; i < internalCards.Length; i++)
                 {
-                    if(internalCards[i].CardRank == card.CardRank)
+                    if (Equals(internalCards[i], card))
                     {
                         index = i;
                     }
