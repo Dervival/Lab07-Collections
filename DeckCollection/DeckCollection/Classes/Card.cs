@@ -38,10 +38,5 @@ namespace DeckCollection.Classes
             King,
             Ace
         };
-
-        public static void DisplayCard(Card card)
-        {
-            Console.WriteLine(card.CardRank + " of " + card.CardSuit);
-        }
     }
 }
