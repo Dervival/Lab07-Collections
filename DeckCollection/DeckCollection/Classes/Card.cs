@@ -4,7 +4,44 @@ using System.Text;
 
 namespace DeckCollection.Classes
 {
-    class Card
+    public class Card
     {
+        public Enum CardSuit { get; set; }
+        public Enum CardRank { get; set; }
+        public Card(Rank cardRank, Suit cardSuit)
+        {
+            CardRank = cardRank;
+            CardSuit = cardSuit;
+        }
+
+        public enum Suit
+        {
+            Hearts,
+            Diamonds,
+            Spades,
+            Clubs
+        };
+
+        public enum Rank
+        {
+            Two,
+            Three,
+            Four,
+            Five,
+            Six,
+            Seven,
+            Eight,
+            Nine,
+            Ten,
+            Jack,
+            Queen,
+            King,
+            Ace
+        };
+
+        public static void DisplayCard(Card card)
+        {
+            Console.WriteLine(card.CardRank + " of " + card.CardSuit);
+        }
     }
 }

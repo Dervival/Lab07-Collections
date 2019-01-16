@@ -7,5 +7,7 @@ namespace DeckCollection.Classes
 {
     class Deck
     {
+        
+        
     }
 }

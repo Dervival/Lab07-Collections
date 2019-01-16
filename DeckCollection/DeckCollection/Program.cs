@@ -1,12 +1,15 @@
 ﻿using System;
+using DeckCollection.Classes;
 
 namespace DeckCollection
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Card testCard = new Card(Card.Rank.Ten, Card.Suit.Hearts);
+            Card.DisplayCard(testCard);
         }
     }
 }
