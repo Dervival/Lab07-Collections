@@ -68,6 +68,22 @@ namespace DeckCollection
                 internalCards[currentIndex] = newCard;
                 currentIndex++;
             }
+            //public Card RemoveCard(Card removeCard)
+            //{
+            //    for(int)
+            //}
+            public int FindCardIndex(Card card)
+            {
+                int index = -1;
+                for(int i = 0; i < internalCards.Length; i++)
+                {
+                    if(internalCards[i].CardRank == card.CardRank)
+                    {
+                        index = i;
+                    }
+                }
+                return index;
+            }
 
             public Card[] GrowArray(Card[] arrayToResize)
             {
