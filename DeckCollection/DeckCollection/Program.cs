@@ -9,46 +9,55 @@ namespace DeckCollection
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Instantiation of the generic collection, where T = Card;
+            Deck<Card> testDeck = new Deck<Card>();
+            //Adding two cards directly by creating a card then adding it to the deck...
             Card testCard = new Card(Card.Rank.Ten, Card.Suit.Hearts);
             Card nextCard = new Card(Card.Rank.Four, Card.Suit.Clubs);
-            //Card.DisplayCard(testCard);
-            Deck<Card> testDeck = new Deck<Card>();
             testDeck.AddCard(testCard);
             testDeck.AddCard(nextCard);
-            foreach (Card card in testDeck)
-            {
-                DisplayCard(card);
-            }
-            //Can't do this, changes card in the deck since it passes the reference
-            //nextCard.CardRank = Card.Rank.Nine;
-            //nextCard.CardSuit = Card.Suit.Diamonds;
+            //Adding the other 10 cards meet the 10+ instantiation requirement
             AddCardToDeck(Card.Rank.Nine, Card.Suit.Diamonds, testDeck);
-            DisplayDeck(testDeck);
             AddCardToDeck(Card.Rank.Eight, Card.Suit.Diamonds, testDeck);
-            DisplayDeck(testDeck);
             AddCardToDeck(Card.Rank.Seven, Card.Suit.Diamonds, testDeck);
-            DisplayDeck(testDeck);
             AddCardToDeck(Card.Rank.Six, Card.Suit.Diamonds, testDeck);
-            DisplayDeck(testDeck);
             AddCardToDeck(Card.Rank.Six, Card.Suit.Spades, testDeck);
+            AddCardToDeck(Card.Rank.Six, Card.Suit.Hearts, testDeck);
+            AddCardToDeck(Card.Rank.Six, Card.Suit.Clubs, testDeck);
+            AddCardToDeck(Card.Rank.Seven, Card.Suit.Clubs, testDeck);
+            AddCardToDeck(Card.Rank.Ace, Card.Suit.Clubs, testDeck);
+            AddCardToDeck(Card.Rank.Queen, Card.Suit.Diamonds, testDeck);
+            //Showing that add and remove actually change the state of the deck
+            Console.WriteLine("Welcome to my Deck program.\n");
+            Console.Write("There are currently " + testDeck.CountCards() + " cards in the deck: ");
+            //required foreach loop in DisplayDeck
             DisplayDeck(testDeck);
+            Card addCard = new Card(Card.Rank.Two, Card.Suit.Spades);
+            Console.WriteLine("\nNow adding the " + addCard.DisplayCard() + " to the deck.");
+            testDeck.AddCard(addCard);
+            Console.Write("There are currently " + testDeck.CountCards() + " cards in the deck: ");
+            DisplayDeck(testDeck);
+            Console.WriteLine("\nNow removing the " + nextCard.DisplayCard() + " from the deck.");
             testDeck.RemoveCard(nextCard);
-            AddCardToDeck(0, 0, testDeck);
+            Console.Write("There are currently " + testDeck.CountCards() + " cards in the deck: ");
             DisplayDeck(testDeck);
+            //Calling Deal();
+            Deal(testDeck);
         }
 
-        public static void DisplayCard(Card card)
-        {
-            Console.WriteLine(card.CardRank + " of " + card.CardSuit);
-        }
-
+        
         public static void DisplayDeck(Deck<Card> deck)
         {
+            if(deck.CountCards() < 1)
+            {
+                Console.WriteLine("Empty");
+                return;
+            }
             foreach (Card card in deck)
             {
-                DisplayCard(card);
+                Console.Write(card.DisplayCard() + ", ");
             }
+            Console.WriteLine("and that's it.");   
         }
 
         public static void AddCardToDeck(Card.Rank rank, Card.Suit suit, Deck<Card> deck)
@@ -57,6 +66,39 @@ namespace DeckCollection
             deck.AddCard(addedCard);
         }
 
-        
+        public static void Deal(Deck<Card> dealer)
+        {
+            Console.WriteLine("\nNow running Deal().");
+            Deck<Card> playerOne = new Deck<Card>();
+            Deck<Card> playerTwo = new Deck<Card>();
+            Console.Write("\nPlayer one's deck before deal: ");
+            DisplayDeck(playerOne);
+            Console.Write("Player two's deck before deal: ");
+            DisplayDeck(playerTwo);
+            Console.Write("Dealer's deck before deal: ");
+            DisplayDeck(dealer);
+            int cardsToDeal = dealer.CountCards();
+            if(cardsToDeal % 2 == 1){
+                cardsToDeal--;
+            }
+            for (int i = 0; i < cardsToDeal; i++)
+            {
+                if(i % 2 == 0)
+                {
+                    playerOne.AddCard(dealer.RemoveCardAtIndex(0));
+                }
+                else
+                {
+                    playerTwo.AddCard(dealer.RemoveCardAtIndex(0));
+                }
+            }
+            Console.WriteLine("\nDeal complete.");
+            Console.Write("\nPlayer one's deck after deal: ");
+            DisplayDeck(playerOne);
+            Console.Write("Player two's deck after deal: ");
+            DisplayDeck(playerTwo);
+            Console.Write("Dealer's deck after deal: ");
+            DisplayDeck(dealer);
+        }
     }
 }

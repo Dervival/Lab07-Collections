@@ -15,6 +15,7 @@ namespace DeckCollection.Classes
         {
             return CardSuit;
         } 
+
         public Rank CardRank { get; set; }
         public void SetRank(Rank rank)
         {
@@ -55,6 +56,12 @@ namespace DeckCollection.Classes
             King,
             Ace
         };
+
+        public string DisplayCard()
+        {
+            string describeCard = CardRank + " of " + CardSuit;
+            return describeCard;
+        }
 
         public bool Equals(Card a, Card b)
         {
