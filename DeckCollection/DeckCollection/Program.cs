@@ -7,6 +7,10 @@ namespace DeckCollection
 {
     public class Program
     {
+        /// <summary>
+        /// Main method to showoff the various features of the deck implementation through a console application.
+        /// </summary>
+        /// <param name="args">Any arguments to pass into the application - in this case, none are used.</param>
         public static void Main(string[] args)
         {
             //Instantiation of the generic collection, where T = Card;
@@ -45,7 +49,10 @@ namespace DeckCollection
             Deal(testDeck);
         }
 
-        
+        /// <summary>
+        /// Iterates through a deck of cards using a foreach loop to describe the cards in a deck. Since this is contingent on the elements in a Deck being of type Card instead of a generic type T, it does not belong in the deck class.
+        /// </summary>
+        /// <param name="deck">The deck to be displayed.</param>
         public static void DisplayDeck(Deck<Card> deck)
         {
             if(deck.CountCards() < 1)
@@ -60,12 +67,22 @@ namespace DeckCollection
             Console.WriteLine("and that's it.");   
         }
 
+        /// <summary>
+        /// Adds a card to the deck using the AddCard functionality of the deck class.
+        /// </summary>
+        /// <param name="rank">Rank of the card to be added.</param>
+        /// <param name="suit">Suit of the card to be added.</param>
+        /// <param name="deck">Deck to add the card to.</param>
         public static void AddCardToDeck(Card.Rank rank, Card.Suit suit, Deck<Card> deck)
         {
             Card addedCard = new Card(rank, suit);
             deck.AddCard(addedCard);
         }
 
+        /// <summary>
+        /// Function that takes a given deck and "deals" an equal number of cards to two internal players, displaying the state of all three decks before and after the deal. Dealing is done by removing the top card of the dealer's deck and adding it to a player's hand. If the dealer's deck has an even number of cards, all cards are dealt from the dealer's deck; if not, all but one are dealt and the final card is kept by the dealer. Mutates the dealer's deck. The player's hands are not kept after the method is complete.
+        /// </summary>
+        /// <param name="dealer">The deck to deal cards from.</param>
         public static void Deal(Deck<Card> dealer)
         {
             Console.WriteLine("\nNow running Deal().");
